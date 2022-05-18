@@ -56,6 +56,7 @@ class Menu extends StatelessWidget {
             const ItemMenu(
               itemIcono: Icons.info_outline,
               itemNombre: 'Acerca de Nutrigest',
+              link: 'acerca',
             ),
           ],
         ));

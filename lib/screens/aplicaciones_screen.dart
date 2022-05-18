@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../components/components.dart';
 import '../providers/providers.dart';
@@ -14,6 +13,11 @@ class AplicacionesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final drupalProvider = Provider.of<DrupalProvider>(context);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.pushNamed(context, 'home'),
+        child: const Icon(Icons.home),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       drawer: const Menu(),
       backgroundColor: colorCrema,
       appBar: const AppBarComponent(titulo: 'Nuestras Aplicaciones'),
@@ -54,16 +58,14 @@ class AplicacionesScreen extends StatelessWidget {
                         child: Text(aplicacion.descripcion,
                             textAlign: TextAlign.justify)),
                     GestureDetector(
-                      onTap: () {
-                        final Uri _url = Uri.parse(aplicacion.enlace);
-                        _launchInBrowser(_url);
-                      },
+                      onTap: () =>
+                          drupalProvider.launchInBrowser(aplicacion.enlace),
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.all(15),
                         width: double.infinity,
                         decoration: containerEstiloBoton(colorPrincipal, 20),
-                        child: Text(
+                        child:const Text(
                           'DESCARGAR',
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
@@ -80,17 +82,4 @@ class AplicacionesScreen extends StatelessWidget {
       ),
     );
   }
-
-  Future<void> _launchInBrowser(Uri url) async {
-    if (!await launchUrl(
-      url,
-      mode: LaunchMode.externalApplication,
-    )) {
-      throw 'Could not launch $url';
-    }
-  }
-  // void _launchUrl() async {
-  //   if (!await launchUrl(_url)) throw 'Could not launch $_url';
-  // }
-
 }

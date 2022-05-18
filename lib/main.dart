@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Nutrigest',
         theme: DefaultTheme.base,
-        initialRoute: AplicacionesScreen.routerName,
+        initialRoute: HomeScreen.routerName,
         routes: {
           HomeScreen.routerName: (context) => const HomeScreen(),
           GestanteScreen.routerName: (context) => const GestanteScreen(),
@@ -48,6 +48,17 @@ class MyApp extends StatelessWidget {
           AplicacionesScreen.routerName: (context) =>
               const AplicacionesScreen(),
           CompartirScreen.routerName: (context) => const CompartirScreen(),
+          AcercaScreen.routerName: (context) => const AcercaScreen(),
+          CreditosScreen.routerName: (context) => const CreditosScreen(),
+          ComoAlimentarseScreen.routerName: (context) =>
+              const ComoAlimentarseScreen(),
+          AlimentacionSaludableScreen.routerName: (context) =>
+              const AlimentacionSaludableScreen(),
+          RecetariosScreen.routerName: (context) => const RecetariosScreen(),
+          PublicacionesScreen.routerName: (context) =>
+              const PublicacionesScreen(),
+          PublicacionesNutricionalScreen.routerName: (context) =>
+              const PublicacionesNutricionalScreen(),
         });
   }
 }

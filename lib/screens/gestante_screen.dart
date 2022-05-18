@@ -23,7 +23,7 @@ class GestanteScreen extends StatelessWidget {
             BotonComponent(
               icono: icoPresentacion,
               nombre: 'Presentacion',
-              link: 'home',
+              link: 'presentacion',
             ),
             BotonComponent(
               icono: icoCalculadoras,
@@ -36,19 +36,19 @@ class GestanteScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             BotonComponent(
-                icono: icoPresentacion,
+                icono: icoComoAlimentarse,
                 nombre: '¿Como alimentarse?',
-                link: 'home',
+                link: 'como-alimentarse',
                 alto: 125),
             BotonComponent(
-                icono: icoComoAlimentarse,
+                icono: icoAlimentacionSaludable,
                 nombre: 'Alimentación saludable',
-                link: 'home',
+                link: 'alimentacion-saludable',
                 alto: 125),
             BotonComponent(
                 icono: icoRecetarios,
                 nombre: 'Recetarios',
-                link: 'home',
+                link: 'recetarios',
                 alto: 125),
           ],
         ),

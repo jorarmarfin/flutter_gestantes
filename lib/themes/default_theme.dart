@@ -39,6 +39,8 @@ class DefaultTheme {
       bodyText2: const TextStyle(color: colorPrincipal),
 //headline2-6,subtitle1-2,bodyText1-2,caption
     ),
+    floatingActionButtonTheme:
+        const FloatingActionButtonThemeData(backgroundColor: colorPrincipal),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
             maximumSize: const Size(5, 8),

@@ -23,13 +23,13 @@ class NutricionistaScreen extends StatelessWidget {
             BotonComponent(
               icono: icoPresentacion,
               nombre: 'Presentacion',
-              link: 'home',
+              link: 'presentacion',
               alto: 110,
             ),
             BotonComponent(
               icono: icoPublicaciones,
               nombre: 'Publicaciones',
-              link: 'home',
+              link: 'publicaciones-nutricional',
               alto: 110,
             ),
             BotonComponent(
@@ -66,17 +66,17 @@ class NutricionistaScreen extends StatelessWidget {
             BotonComponent(
                 icono: icoComoAlimentarse,
                 nombre: '¿Como alimentarse?',
-                link: 'home',
+                link: 'como-alimentarse',
                 alto: 125),
             BotonComponent(
                 icono: icoAlimentacionSaludable,
                 nombre: 'Alimentación saludable',
-                link: 'home',
+                link: 'alimentacion-saludable',
                 alto: 125),
             BotonComponent(
                 icono: icoRecetarios,
                 nombre: 'Recetarios',
-                link: 'home',
+                link: 'recetarios',
                 alto: 125),
           ],
         ),

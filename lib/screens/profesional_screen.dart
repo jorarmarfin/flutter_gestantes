@@ -21,14 +21,13 @@ class ProfesionalScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             BotonComponent(
-              icono: icoPresentacion,
-              nombre: 'Presentacion',
-              link: 'home',
-            ),
+                icono: icoPresentacion,
+                nombre: 'Presentacion',
+                link: 'presentacion'),
             BotonComponent(
               icono: icoPublicaciones,
               nombre: 'Publicaciones',
-              link: 'home',
+              link: 'publicaciones',
             ),
             BotonComponent(
               icono: icoCalculadoras,
@@ -41,20 +40,20 @@ class ProfesionalScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             BotonComponent(
-              icono: icoPresentacion,
-              nombre: '¿Como alimentarse?',
-              link: 'home',
-            ),
+                icono: icoPresentacion,
+                nombre: '¿Como alimentarse?',
+                link: 'como-alimentarse',
+                alto: 125),
             BotonComponent(
-              icono: icoComoAlimentarse,
-              nombre: 'Alimentación saludable',
-              link: 'home',
-            ),
+                icono: icoComoAlimentarse,
+                nombre: 'Alimentación saludable',
+                link: 'alimentacion-saludable',
+                alto: 125),
             BotonComponent(
-              icono: icoRecetarios,
-              nombre: 'Recetarios',
-              link: 'home',
-            ),
+                icono: icoRecetarios,
+                nombre: 'Recetarios',
+                link: 'recetarios',
+                alto: 125),
           ],
         ),
         Expanded(child: Container()),

@@ -5,9 +5,9 @@ import '../components/components.dart';
 import '../providers/providers.dart';
 import '../themes/default_theme.dart';
 
-class PresentacionScreen extends StatelessWidget {
-  const PresentacionScreen({Key? key}) : super(key: key);
-  static String routerName = 'presentacion';
+class AcercaScreen extends StatelessWidget {
+  const AcercaScreen({Key? key}) : super(key: key);
+  static String routerName = 'acerca';
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,9 @@ class PresentacionScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       drawer: const Menu(),
       backgroundColor: colorCrema,
-      appBar: const AppBarComponent(titulo: 'Presentación'),
+      appBar: const AppBarComponent(titulo: 'Acerca de Nutrigest'),
       body: FutureBuilder(
-        future: drupalProvider.getPresentacion('presentacion'),
+        future: drupalProvider.getPresentacion('acerca-de'),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -43,10 +43,21 @@ class PresentacionScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
                   drupalProvider.presentacion.resumen,
                   textAlign: TextAlign.justify,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                decoration: containerEstiloBoton(colorPrincipal, 25),
+                child: ListTile(
+                  onTap: () => Navigator.pushNamed(context, 'creditos'),
+                  title:const Text(
+                    'CREDITOS',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
             ]);

@@ -1,0 +1,102 @@
+import 'package:animate_do/animate_do.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gestantes/models/models.dart';
+import 'package:provider/provider.dart';
+
+import '../components/components.dart';
+import '../providers/providers.dart';
+import '../themes/default_theme.dart';
+
+class PublicacionesScreen extends StatelessWidget {
+  const PublicacionesScreen({Key? key}) : super(key: key);
+  static String routerName = 'publicaciones';
+
+  @override
+  Widget build(BuildContext context) {
+    final drupalProvider = Provider.of<DrupalProvider>(context);
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.pushNamed(context, 'home'),
+        child: const Icon(Icons.home),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+      drawer: const Menu(),
+      backgroundColor: colorCrema,
+      appBar: const AppBarComponent(titulo: 'Publicaciones'),
+      body: FutureBuilder(
+        future: drupalProvider.getPublicaciones('Profesional'),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            final listPublicaciones = drupalProvider.listaPublicaciones;
+            return ListView.builder(
+                itemCount: listPublicaciones.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final url =
+                      drupalProvider.baseUrl + listPublicaciones[index].imagen;
+                  final enlace =
+                      (listPublicaciones[index].archivo.contains('pdf'))
+                          ? drupalProvider.baseUrl +
+                              listPublicaciones[index].archivo
+                          : listPublicaciones[index].enlace;
+                  return ZoomIn(
+                    child: GestureDetector(
+                        onTap: () => drupalProvider.launchInBrowser(enlace),
+                        child: _ItemReceta(
+                          url: url,
+                          publicaciones: listPublicaciones,
+                          index: index,
+                        )),
+                  );
+                });
+          }
+        },
+      ),
+    );
+  }
+}
+
+class _ItemReceta extends StatelessWidget {
+  const _ItemReceta({
+    Key? key,
+    required this.url,
+    required this.publicaciones,
+    required this.index,
+  }) : super(key: key);
+
+  final String url;
+  final List<PublicacionModel> publicaciones;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(18),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: Row(children: [
+            Image(
+              image: NetworkImage(url),
+              height: 100,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  publicaciones[index].titulo,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            )
+          ]),
+        ),
+      ),
+    );
+  }
+}
