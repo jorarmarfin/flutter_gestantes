@@ -14,6 +14,7 @@ class ContenidoGeneralModel {
         this.mensaje,
         this.seccion,
         this.tipoPresentacion,
+        this.items,
     });
 
     String titulo;
@@ -24,6 +25,7 @@ class ContenidoGeneralModel {
     String ?mensaje;
     String ?seccion;
     String ?tipoPresentacion;
+    String ?items;
 
     factory ContenidoGeneralModel.fromJson(String str) => ContenidoGeneralModel.fromMap(json.decode(str));
 
@@ -38,6 +40,7 @@ class ContenidoGeneralModel {
         mensaje: json["mensaje"],
         seccion: json["seccion"],
         tipoPresentacion: json["tipo_presentacion"],
+        items: json["items"],
     );
 
     Map<String, dynamic> toMap() => {
@@ -49,5 +52,6 @@ class ContenidoGeneralModel {
         "mensaje": mensaje,
         "seccion": seccion,
         "tipo_presentacion": tipoPresentacion,
+        "items": items,
     };
 }

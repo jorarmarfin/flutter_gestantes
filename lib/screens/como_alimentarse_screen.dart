@@ -14,31 +14,54 @@ class ComoAlimentarseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final drupalProvider = Provider.of<DrupalProvider>(context);
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, 'home'),
-        child: const Icon(Icons.home),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       drawer: const Menu(),
       backgroundColor: colorCrema,
       appBar: const AppBarComponent(titulo: '¿Como alimentarse?'),
-      body: FutureBuilder(
-        future: drupalProvider.getContenidoGeneral(46),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            final arrayImagenes =
-                drupalProvider.contenidoGeneral.imagen.toString().split('|');
-            return ListView.builder(
-                itemCount: arrayImagenes.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final url = drupalProvider.baseUrl + arrayImagenes[index];
-                  return ZoomIn(child: ImagenconBordeComponent(url: url));
-                });
-          }
-        },
+      body: Stack(
+        alignment: AlignmentDirectional.bottomCenter,
+        children: [
+          _Contenido(drupalProvider: drupalProvider),
+          const BotonFooter()
+        ],
       ),
+    );
+  }
+}
+
+class _Contenido extends StatelessWidget {
+  const _Contenido({
+    Key? key,
+    required this.drupalProvider,
+  }) : super(key: key);
+  final DrupalProvider drupalProvider;
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: drupalProvider.getContenidoGeneral(46),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          final arrayImagenes =
+              drupalProvider.contenidoGeneral.imagen.toString().split('|');
+          return ListView.builder(
+              itemCount: arrayImagenes.length,
+              itemBuilder: (BuildContext context, int index) {
+                final url = drupalProvider.baseUrl + arrayImagenes[index];
+                return ZoomIn(
+                    child: Column(
+                  children: [
+                    ImagenconBordeComponent(url: url),
+                    (index == arrayImagenes.length - 1)
+                        ? const SizedBox(
+                            height: 50,
+                          )
+                        : Container()
+                  ],
+                ));
+              });
+        }
+      },
     );
   }
 }

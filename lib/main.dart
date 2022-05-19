@@ -59,6 +59,19 @@ class MyApp extends StatelessWidget {
               const PublicacionesScreen(),
           PublicacionesNutricionalScreen.routerName: (context) =>
               const PublicacionesNutricionalScreen(),
+          ListaIntercambioScreen.routerName: (context) =>
+              const ListaIntercambioScreen(),
+          ListaIntercambioPageScreen.routerName: (context) =>
+              const ListaIntercambioPageScreen(),
+          MetodoPlatoScreen.routerName: (context) => const MetodoPlatoScreen(),
+          MetodoPlatoPageScreen.routerName: (context) =>
+              const MetodoPlatoPageScreen(),
+          MetodoPlatoArmandoScreen.routerName: (context) =>
+              const MetodoPlatoArmandoScreen(),
+          MetodoPlatoEjemplosRealesScreen.routerName: (context) =>
+              const MetodoPlatoEjemplosRealesScreen(),
+          MetodoPlatoMedidaCorrectaScreen.routerName: (context) =>
+              const MetodoPlatoMedidaCorrectaScreen(),
         });
   }
 }

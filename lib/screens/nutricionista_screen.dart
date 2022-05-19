@@ -46,12 +46,12 @@ class NutricionistaScreen extends StatelessWidget {
             BotonComponent(
                 icono: icoListaIntercambio,
                 nombre: 'Lista de intercambio',
-                link: 'home',
+                link: 'lista-intercambio',
                 alto: 125),
             BotonComponent(
                 icono: icoMetodoPlato,
                 nombre: 'Método del plato',
-                link: 'home',
+                link: 'metodo-plato',
                 alto: 125),
             BotonComponent(
                 icono: icoMetodoMano,

@@ -18,14 +18,20 @@ class DrupalProvider extends ChangeNotifier {
   List<RecetaModel> listaRecetas = [];
   List<PublicacionModel> listaPublicaciones = [];
   String _tipoPublicacion = 'Profesional';
-  
+  int _nid = 0;
+
+  int get nid => _nid;
+
+  set nid(int value) {
+    _nid = value;
+  }
+
   String get tipoPublicacion => _tipoPublicacion;
-  
+
   set tipoPublicacion(String value) {
     _tipoPublicacion = value;
     notifyListeners();
   }
-  
 
   Future getPresentacion(String api) async {
     var url = Uri.parse('$baseUrl/api/$api?_format=json');

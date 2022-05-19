@@ -6,11 +6,13 @@ class ImagenconBordeComponent extends StatelessWidget {
     required this.url,
     this.alto,
     this.ancho,
+    this.padding = 15.0,
   }) : super(key: key);
 
   final String url;
   final double? alto;
   final double? ancho;
+  final double? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class ImagenconBordeComponent extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: EdgeInsets.all(padding!),
       child: ClipRRect(
           borderRadius: BorderRadius.circular(20), child: widgetImagen),
     );

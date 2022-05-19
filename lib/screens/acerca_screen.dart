@@ -15,23 +15,42 @@ class AcercaScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final alto = size.height;
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, 'home'),
-        child: const Icon(Icons.home),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       drawer: const Menu(),
       backgroundColor: colorCrema,
       appBar: const AppBarComponent(titulo: 'Acerca de Nutrigest'),
-      body: FutureBuilder(
-        future: drupalProvider.getPresentacion('acerca-de'),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            final url =
-                drupalProvider.baseUrl + drupalProvider.presentacion.imagen;
-            return Column(children: [
+      body: Stack(
+        alignment: AlignmentDirectional.bottomCenter,
+        children: [
+          _Contenido(drupalProvider: drupalProvider, alto: alto),
+          const BotonFooter()
+        ],
+      ),
+    );
+  }
+}
+
+class _Contenido extends StatelessWidget {
+  const _Contenido({
+    Key? key,
+    required this.drupalProvider,
+    required this.alto,
+  }) : super(key: key);
+
+  final DrupalProvider drupalProvider;
+  final double alto;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: drupalProvider.getPresentacion('acerca-de'),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          final url =
+              drupalProvider.baseUrl + drupalProvider.presentacion.imagen;
+          return SingleChildScrollView(
+            child: Column(children: [
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: ClipRRect(
@@ -49,21 +68,27 @@ class AcercaScreen extends StatelessWidget {
                   textAlign: TextAlign.justify,
                 ),
               ),
+              const SizedBox(
+                height: 10,
+              ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                 decoration: containerEstiloBoton(colorPrincipal, 25),
                 child: ListTile(
                   onTap: () => Navigator.pushNamed(context, 'creditos'),
-                  title:const Text(
+                  title: const Text(
                     'CREDITOS',
                     textAlign: TextAlign.center,
                   ),
                 ),
               ),
-            ]);
-          }
-        },
-      ),
+              const SizedBox(
+                height: 150,
+              )
+            ]),
+          );
+        }
+      },
     );
   }
 }

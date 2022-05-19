@@ -15,6 +15,8 @@ class HomeScreen extends StatelessWidget {
           titulo: '¿Cuál es tu perfil?', botonBack: false),
       body: SingleChildScrollView(
           child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: const [
           SizedBox(
             height: 10,

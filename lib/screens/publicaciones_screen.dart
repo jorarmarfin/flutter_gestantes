@@ -15,44 +15,65 @@ class PublicacionesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final drupalProvider = Provider.of<DrupalProvider>(context);
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, 'home'),
-        child: const Icon(Icons.home),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       drawer: const Menu(),
       backgroundColor: colorCrema,
       appBar: const AppBarComponent(titulo: 'Publicaciones'),
-      body: FutureBuilder(
-        future: drupalProvider.getPublicaciones('Profesional'),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            final listPublicaciones = drupalProvider.listaPublicaciones;
-            return ListView.builder(
-                itemCount: listPublicaciones.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final url =
-                      drupalProvider.baseUrl + listPublicaciones[index].imagen;
-                  final enlace =
-                      (listPublicaciones[index].archivo.contains('pdf'))
-                          ? drupalProvider.baseUrl +
-                              listPublicaciones[index].archivo
-                          : listPublicaciones[index].enlace;
-                  return ZoomIn(
-                    child: GestureDetector(
-                        onTap: () => drupalProvider.launchInBrowser(enlace),
-                        child: _ItemReceta(
-                          url: url,
-                          publicaciones: listPublicaciones,
-                          index: index,
-                        )),
-                  );
-                });
-          }
-        },
-      ),
+      body: Stack(alignment: AlignmentDirectional.bottomCenter, children: [
+        _Contenido(drupalProvider: drupalProvider),
+        const BotonFooter()
+      ]),
+    );
+  }
+}
+
+class _Contenido extends StatelessWidget {
+  const _Contenido({
+    Key? key,
+    required this.drupalProvider,
+  }) : super(key: key);
+
+  final DrupalProvider drupalProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: drupalProvider.getPublicaciones('Profesional'),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          final listPublicaciones = drupalProvider.listaPublicaciones;
+          return ListView.builder(
+              itemCount: listPublicaciones.length,
+              itemBuilder: (BuildContext context, int index) {
+                final url =
+                    drupalProvider.baseUrl + listPublicaciones[index].imagen;
+                final enlace = (listPublicaciones[index]
+                        .archivo
+                        .contains('pdf'))
+                    ? drupalProvider.baseUrl + listPublicaciones[index].archivo
+                    : listPublicaciones[index].enlace;
+                return Column(
+                  children: [
+                    ZoomIn(
+                      child: GestureDetector(
+                          onTap: () => drupalProvider.launchInBrowser(enlace),
+                          child: _ItemReceta(
+                            url: url,
+                            publicaciones: listPublicaciones,
+                            index: index,
+                          )),
+                    ),
+                    (index == listPublicaciones.length - 1)
+                        ? const SizedBox(
+                            height: 50,
+                          )
+                        : Container()
+                  ],
+                );
+              });
+        }
+      },
     );
   }
 }
