@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -52,8 +53,7 @@ class _Contenido extends StatelessWidget {
           final List items = contenidoGeneral.items.toString().split('|');
           final List imagenes =
               contenidoGeneral.imagenPrincipal.toString().split('|');
-          final url1 = drupalProvider.baseUrl + imagenes[0];
-          final url2 = drupalProvider.baseUrl + imagenes[1];
+          int index = 0;
           return SingleChildScrollView(
             child: Column(
               children: [
@@ -74,14 +74,32 @@ class _Contenido extends StatelessWidget {
                     contenidoGeneral.descripcion.toString(),
                   ),
                 ),
-                _Vineta(items: items, index: 0),
-                _Vineta(items: items, index: 1),
-                _Vineta(items: items, index: 2),
-                ImagenconBordeComponent(
-                  url: url1,
-                  alto: 250,
-                ),
-                ImagenconBordeComponent(url: url2, alto: 250),
+                ...items.map((e) {
+                  index++;
+                  return Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                    child: SizedBox(
+                        width: double.infinity,
+                        child: Text(index.toString() + '. ' + e)),
+                  );
+                }),
+                ...imagenes.map((e) {
+                  final url = drupalProvider.baseUrl + e;
+                  return ZoomIn(
+                      child: ImagenconBordeComponent(
+                    url: url,
+                    alto: 250,
+                  ));
+                }),
+                // _Vineta(items: items, index: 0),
+                // _Vineta(items: items, index: 1),
+                // _Vineta(items: items, index: 2),
+                // ImagenconBordeComponent(
+                //   url: url1,
+                //   alto: 250,
+                // ),
+                // ImagenconBordeComponent(url: url2, alto: 250),
                 SizedBox(
                   height: alto,
                 ),
@@ -90,33 +108,6 @@ class _Contenido extends StatelessWidget {
           );
         }
       },
-    );
-  }
-}
-
-class _Vineta extends StatelessWidget {
-  const _Vineta({
-    Key? key,
-    required this.items,
-    required this.index,
-  }) : super(key: key);
-
-  final List items;
-  final int index;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-            child: Text(
-              items[index],
-            ),
-          ),
-        )
-      ],
     );
   }
 }

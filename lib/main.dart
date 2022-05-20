@@ -21,6 +21,10 @@ class AppState extends StatelessWidget {
           lazy: false,
           create: (_) => DrupalProvider(),
         ),
+        ChangeNotifierProvider(
+          lazy: false,
+          create: (_) => LocalProvider(),
+        ),
       ],
       child: const MyApp(),
     );
@@ -36,7 +40,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Nutrigest',
         theme: DefaultTheme.base,
-        initialRoute: HomeScreen.routerName,
+        initialRoute: MetodoPlatoArmandoScreen.routerName,
         routes: {
           HomeScreen.routerName: (context) => const HomeScreen(),
           GestanteScreen.routerName: (context) => const GestanteScreen(),
@@ -72,6 +76,17 @@ class MyApp extends StatelessWidget {
               const MetodoPlatoEjemplosRealesScreen(),
           MetodoPlatoMedidaCorrectaScreen.routerName: (context) =>
               const MetodoPlatoMedidaCorrectaScreen(),
+          MetodoManoScreen.routerName: (context) => const MetodoManoScreen(),
+          MetodoManoPorcionScreen.routerName: (context) =>
+              const MetodoManoPorcionScreen(),
+          MetodoManoPageScreen.routerName: (context) =>
+              const MetodoManoPageScreen(),
+          MetodoManoEjemploScreen.routerName: (context) =>
+              const MetodoManoEjemploScreen(),
+          MetodoManoPorcionCaloriasScreen.routerName: (context) =>
+              const MetodoManoPorcionCaloriasScreen(),
+          MetodoManoDistorsionScreen.routerName: (context) =>
+              const MetodoManoDistorsionScreen(),
         });
   }
 }

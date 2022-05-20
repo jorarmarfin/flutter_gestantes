@@ -6,26 +6,25 @@ import '../components/components.dart';
 import '../providers/providers.dart';
 import '../themes/default_theme.dart';
 
-class MetodoPlatoEjemplosRealesScreen extends StatelessWidget {
-  const MetodoPlatoEjemplosRealesScreen({Key? key}) : super(key: key);
-  static String routerName = 'metodo-plato-ejemplos';
+class MetodoManoPageScreen extends StatelessWidget {
+  const MetodoManoPageScreen({Key? key}) : super(key: key);
+  static String routerName = 'metodo-mano-page';
 
   @override
   Widget build(BuildContext context) {
     final drupalProvider = Provider.of<DrupalProvider>(context);
 
     return Scaffold(
-      drawer: const Menu(),
-      backgroundColor: colorCrema,
-      appBar: const AppBarComponent(titulo: 'Metodo del Plato'),
-      body: Stack(
-        alignment: AlignmentDirectional.bottomCenter,
-        children: [
-          _Contenido(drupalProvider: drupalProvider, alto: 50),
-          const BotonFooter()
-        ],
-      ),
-    );
+        drawer: const Menu(),
+        backgroundColor: colorCrema,
+        appBar: const AppBarComponent(titulo: 'Metodo Mano'),
+        body: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          children: [
+            _Contenido(drupalProvider: drupalProvider, alto: 50),
+            const BotonFooter()
+          ],
+        ));
   }
 }
 
@@ -49,6 +48,8 @@ class _Contenido extends StatelessWidget {
 
           final List titulo = contenidoGeneral.titulo.split('|');
           final List imagenes = contenidoGeneral.imagen.toString().split('|');
+          // final url = drupalProvider.baseUrl +
+          //     contenidoGeneral.imagenPrincipal.toString();
           return SingleChildScrollView(
             child: Column(
               children: [
@@ -66,19 +67,16 @@ class _Contenido extends StatelessWidget {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Text(
+                    contenidoGeneral.descripcion.toString(),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
                 ...imagenes.map((e) {
                   final url = drupalProvider.baseUrl + e;
-                  return ZoomIn(
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(25),
-                        child: Image(
-                          image: NetworkImage(url, scale: 0.05),
-                        ),
-                      ),
-                    ),
-                  );
+                  return ZoomIn(child: ImagenconBordeComponent(url: url));
                 }),
                 SizedBox(
                   height: alto,

@@ -18,13 +18,7 @@ class DrupalProvider extends ChangeNotifier {
   List<RecetaModel> listaRecetas = [];
   List<PublicacionModel> listaPublicaciones = [];
   String _tipoPublicacion = 'Profesional';
-  int _nid = 0;
-
-  int get nid => _nid;
-
-  set nid(int value) {
-    _nid = value;
-  }
+  int nid = 0;
 
   String get tipoPublicacion => _tipoPublicacion;
 

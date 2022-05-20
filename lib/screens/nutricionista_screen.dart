@@ -56,7 +56,7 @@ class NutricionistaScreen extends StatelessWidget {
             BotonComponent(
                 icono: icoMetodoMano,
                 nombre: 'Método de la mano',
-                link: 'home',
+                link: 'metodo-mano',
                 alto: 125),
           ],
         ),

@@ -10,6 +10,9 @@ const colorNaranja = Color(0xffF59F3E);
 //Imagenes
 const imgLoading = 'assets/images/loading.gif';
 const imgINS = 'assets/images/ins.png';
+const imgPlato0 = 'assets/images/plato-0.png';
+const imgTuberculo1 = 'assets/images/t01.png';
+const imgTuberculo2 = 'assets/images/t02.png';
 
 //Iconos
 const icoNutricionistas = 'assets/icons/nutricionistas.png';
@@ -24,6 +27,7 @@ const icoAlimentacionSaludable = 'assets/icons/alimentacion-saludable.png';
 const icoPublicaciones = 'assets/icons/publicaciones.png';
 const icoRecetarios = 'assets/icons/recetarios.png';
 const icoCalculadoras = 'assets/icons/calculadoras.png';
+const icoEscoba = 'assets/icons/escoba.png';
 
 class DefaultTheme {
   static ThemeData base = ThemeData.light().copyWith(
