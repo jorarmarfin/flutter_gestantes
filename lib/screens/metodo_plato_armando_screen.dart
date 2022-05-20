@@ -12,64 +12,291 @@ class MetodoPlatoArmandoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
+    double margenizquierdo = (screenSize.width - 320) / 2;
     final localProvider = Provider.of<LocalProvider>(context);
     return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         floatingActionButton: FloatingActionButton(
-          onPressed: () => localProvider.mostrarTuberculo = false,
+          onPressed: () {
+            localProvider.mostrarTuberculo = false;
+            localProvider.mostrarVerdura = false;
+            localProvider.mostrarCarne = false;
+            localProvider.imgPlato = imgPlato0;
+          },
           child: Image.asset(icoEscoba),
         ),
         drawer: const Menu(),
         backgroundColor: colorCrema,
-        appBar: const AppBarComponent(titulo: 'Armando un Plato3'),
+        appBar: const AppBarComponent(titulo: 'Armando un Plato'),
         body: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Image.asset(imgPlato0),
+            const SizedBox(
+              height: double.infinity,
+              width: double.infinity,
             ),
-            GestureDetector(
-              onTap: () {
-                showDialog(
-                    barrierDismissible: true,
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        elevation: 5,
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            GestureDetector(
-                                onTap: () {
-                                  localProvider.mostrarTuberculo = true;
-                                  Navigator.pop(
-                                    context,
-                                  );
-                                },
-                                child: Image.asset(imgTuberculo1)),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Image.asset(imgTuberculo2),
-                          ],
-                        ),
-                      );
-                    });
-              },
-              child: Container(
-                  height: screenSize.height * 0.3,
-                  width: screenSize.width * 0.5,
-                  color: Colors.white.withOpacity(0.05)),
-            ),
-            (localProvider.mostrarTuberculo)
-                ? Container(
-                    padding: const EdgeInsets.only(left: 45, top: 45),
-                    height: screenSize.height * 0.3,
-                    width: screenSize.width * 0.5,
-                    child: Image.asset(imgTuberculo1))
-                : Container(),
-            Text('MIRAAAAA->' + localProvider.mostrarTuberculo.toString())
+            Positioned(
+                //Plato de Fondo
+                top: 15,
+                left: margenizquierdo,
+                child: Image.asset(localProvider.imgPlato, height: 320)),
+            Positioned(
+                top: 43,
+                left: margenizquierdo + 30,
+                child: _BotonTuberculo(localProvider: localProvider)),
+            Positioned(
+                top: 43,
+                right: margenizquierdo + 30,
+                child: _BotonVerdura(localProvider: localProvider)),
+            Positioned(
+                top: 170,
+                left: margenizquierdo + 30,
+                child: _BotonCarne(localProvider: localProvider)),
+            if (localProvider.mostrarTuberculo)
+              Positioned(
+                top: 80,
+                left: margenizquierdo + 50,
+                child: SizedBox(
+                    child: Image.asset(
+                  localProvider.tuberculoElegido,
+                  height: 70,
+                )),
+              )
+            else
+              Container(),
+            if (localProvider.mostrarVerdura)
+              Positioned(
+                top: 150,
+                right: margenizquierdo + 30,
+                child: SizedBox(
+                    child: Image.asset(
+                  localProvider.verduraElegida,
+                  height: 70,
+                )),
+              )
+            else
+              Container(),
+            if (localProvider.mostrarCarne)
+              Positioned(
+                top: 190,
+                left: margenizquierdo + 50,
+                child: SizedBox(
+                    child: Image.asset(
+                  localProvider.carneElegida,
+                  height: 70,
+                )),
+              )
+            else
+              Container(),
           ],
         ));
+  }
+}
+
+class _BotonTuberculo extends StatelessWidget {
+  const _BotonTuberculo({
+    Key? key,
+    required this.localProvider,
+  }) : super(key: key);
+
+  final LocalProvider localProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                elevation: 5,
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Cereales, tubéculos y menestras',
+                      style: TextStyle(color: colorPrincipal),
+                    ),
+                    _Alimento(
+                        localProvider: localProvider,
+                        tipoAlimento: 't',
+                        imagenDeAlimento: imgTuberculo1),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    _Alimento(
+                        localProvider: localProvider,
+                        tipoAlimento: 't',
+                        imagenDeAlimento: imgTuberculo2),
+                  ],
+                ),
+              );
+            });
+      },
+      child: Container(
+          height: 130,
+          width: 130,
+          color: Colors.white.withOpacity(0.05)), //withOpacity(0.05)
+    );
+  }
+}
+
+class _BotonVerdura extends StatelessWidget {
+  const _BotonVerdura({
+    Key? key,
+    required this.localProvider,
+  }) : super(key: key);
+
+  final LocalProvider localProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                elevation: 5,
+                content: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        'Verduras',
+                        style: TextStyle(color: colorPrincipal),
+                      ),
+                      _Alimento(
+                          localProvider: localProvider,
+                          tipoAlimento: 'v',
+                          imagenDeAlimento: imgVerdura1),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      _Alimento(
+                          localProvider: localProvider,
+                          tipoAlimento: 'v',
+                          imagenDeAlimento: imgVerdura2),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      _Alimento(
+                          localProvider: localProvider,
+                          tipoAlimento: 'v',
+                          imagenDeAlimento: imgVerdura3),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      _Alimento(
+                          localProvider: localProvider,
+                          tipoAlimento: 'v',
+                          imagenDeAlimento: imgVerdura4),
+                    ],
+                  ),
+                ),
+              );
+            });
+      },
+      child: Container(
+          height: 270,
+          width: 130,
+          color: Colors.green.withOpacity(0.05)), //withOpacity(0.05)
+    );
+  }
+}
+
+class _BotonCarne extends StatelessWidget {
+  const _BotonCarne({
+    Key? key,
+    required this.localProvider,
+  }) : super(key: key);
+
+  final LocalProvider localProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                elevation: 5,
+                content: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        'Carnes pescado y huevo',
+                        style: TextStyle(color: colorPrincipal),
+                      ),
+                      _Alimento(
+                          localProvider: localProvider,
+                          tipoAlimento: 'c',
+                          imagenDeAlimento: imgCarne1),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      _Alimento(
+                          localProvider: localProvider,
+                          tipoAlimento: 'c',
+                          imagenDeAlimento: imgCarne2),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      _Alimento(
+                          localProvider: localProvider,
+                          tipoAlimento: 'c',
+                          imagenDeAlimento: imgCarne3),
+                    ],
+                  ),
+                ),
+              );
+            });
+      },
+      child: Container(
+          height: 130,
+          width: 130,
+          color: Colors.orange.withOpacity(0.05)), //withOpacity(0.05)
+    );
+  }
+}
+
+class _Alimento extends StatelessWidget {
+  const _Alimento({
+    Key? key,
+    required this.localProvider,
+    required this.imagenDeAlimento,
+    required this.tipoAlimento,
+  }) : super(key: key);
+
+  final LocalProvider localProvider;
+  final String imagenDeAlimento;
+  final String tipoAlimento;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: () {
+          if (tipoAlimento == 't') {
+            localProvider.mostrarTuberculo = true;
+            localProvider.tuberculoElegido = imagenDeAlimento;
+          }
+          if (tipoAlimento == 'v') {
+            localProvider.mostrarVerdura = true;
+            localProvider.verduraElegida = imagenDeAlimento;
+          }
+          if (tipoAlimento == 'c') {
+            localProvider.mostrarCarne = true;
+            localProvider.carneElegida = imagenDeAlimento;
+          }
+
+          Navigator.pop(
+            context,
+          );
+        },
+        child: Image.asset(imagenDeAlimento));
   }
 }

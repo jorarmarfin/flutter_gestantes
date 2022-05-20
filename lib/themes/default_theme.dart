@@ -11,8 +11,16 @@ const colorNaranja = Color(0xffF59F3E);
 const imgLoading = 'assets/images/loading.gif';
 const imgINS = 'assets/images/ins.png';
 const imgPlato0 = 'assets/images/plato-0.png';
+const imgPlato1 = 'assets/images/plato-1.png';
 const imgTuberculo1 = 'assets/images/t01.png';
 const imgTuberculo2 = 'assets/images/t02.png';
+const imgVerdura1 = 'assets/images/verdura1.png';
+const imgVerdura2 = 'assets/images/verdura2.png';
+const imgVerdura3 = 'assets/images/verdura3.png';
+const imgVerdura4 = 'assets/images/verdura4.png';
+const imgCarne1 = 'assets/images/carne1.png';
+const imgCarne2 = 'assets/images/carne2.png';
+const imgCarne3 = 'assets/images/carne3.png';
 
 //Iconos
 const icoNutricionistas = 'assets/icons/nutricionistas.png';
