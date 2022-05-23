@@ -25,6 +25,10 @@ class AppState extends StatelessWidget {
           lazy: false,
           create: (_) => LocalProvider(),
         ),
+        ChangeNotifierProvider(
+          lazy: false,
+          create: (_) => CalculadoraProvider(),
+        ),
       ],
       child: const MyApp(),
     );
@@ -40,7 +44,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Nutrigest',
         theme: DefaultTheme.base,
-        initialRoute: MetodoPlatoArmandoScreen.routerName,
+        initialRoute: CalculadoraGestanteScreen.routerName,
         routes: {
           HomeScreen.routerName: (context) => const HomeScreen(),
           GestanteScreen.routerName: (context) => const GestanteScreen(),
@@ -87,6 +91,8 @@ class MyApp extends StatelessWidget {
               const MetodoManoPorcionCaloriasScreen(),
           MetodoManoDistorsionScreen.routerName: (context) =>
               const MetodoManoDistorsionScreen(),
+          CalculadoraGestanteScreen.routerName: (context) =>
+              const CalculadoraGestanteScreen(),
         });
   }
 }

@@ -21,6 +21,8 @@ const imgVerdura4 = 'assets/images/verdura4.png';
 const imgCarne1 = 'assets/images/carne1.png';
 const imgCarne2 = 'assets/images/carne2.png';
 const imgCarne3 = 'assets/images/carne3.png';
+const imgFruta1 = 'assets/images/fruta1.png';
+const imgFruta2 = 'assets/images/fruta2.png';
 
 //Iconos
 const icoNutricionistas = 'assets/icons/nutricionistas.png';

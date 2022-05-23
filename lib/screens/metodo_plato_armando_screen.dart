@@ -21,6 +21,7 @@ class MetodoPlatoArmandoScreen extends StatelessWidget {
             localProvider.mostrarTuberculo = false;
             localProvider.mostrarVerdura = false;
             localProvider.mostrarCarne = false;
+            localProvider.mostrarFruta = false;
             localProvider.imgPlato = imgPlato0;
           },
           child: Image.asset(icoEscoba),
@@ -83,6 +84,23 @@ class MetodoPlatoArmandoScreen extends StatelessWidget {
                     child: Image.asset(
                   localProvider.carneElegida,
                   height: 70,
+                )),
+              )
+            else
+              Container(),
+            Positioned(
+              top: 350,
+              right: 40,
+              child: _BotonFruta(localProvider: localProvider),
+            ),
+            if (localProvider.mostrarFruta)
+              Positioned(
+                top: 400,
+                right: margenizquierdo + 40,
+                child: SizedBox(
+                    child: Image.asset(
+                  localProvider.frutaElegida,
+                  height: 100,
                 )),
               )
             else
@@ -264,6 +282,68 @@ class _BotonCarne extends StatelessWidget {
   }
 }
 
+class _BotonFruta extends StatelessWidget {
+  const _BotonFruta({
+    Key? key,
+    required this.localProvider,
+  }) : super(key: key);
+
+  final LocalProvider localProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+            barrierDismissible: true,
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                elevation: 5,
+                content: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        'Frutas',
+                        style: TextStyle(color: colorPrincipal),
+                      ),
+                      _Alimento(
+                          localProvider: localProvider,
+                          tipoAlimento: 'f',
+                          imagenDeAlimento: imgFruta1),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      _Alimento(
+                          localProvider: localProvider,
+                          tipoAlimento: 'f',
+                          imagenDeAlimento: imgFruta2),
+                    ],
+                  ),
+                ),
+              );
+            });
+      },
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        width: 150,
+        decoration: containerEstiloBoton(colorPrincipal, 20),
+        child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Text(
+                'FRUTAS',
+                style: TextStyle(color: Colors.white),
+              ),
+              Icon(Icons.add, color: Colors.white)
+            ]),
+      ), //withOpacity(0.05)
+    );
+  }
+}
+
 class _Alimento extends StatelessWidget {
   const _Alimento({
     Key? key,
@@ -291,6 +371,10 @@ class _Alimento extends StatelessWidget {
           if (tipoAlimento == 'c') {
             localProvider.mostrarCarne = true;
             localProvider.carneElegida = imagenDeAlimento;
+          }
+          if (tipoAlimento == 'f') {
+            localProvider.mostrarFruta = true;
+            localProvider.frutaElegida = imagenDeAlimento;
           }
 
           Navigator.pop(

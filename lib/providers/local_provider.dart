@@ -6,11 +6,13 @@ class LocalProvider extends ChangeNotifier {
   bool _mostrarTuberculo = false;
   bool _mostrarVerdura = false;
   bool _mostrarCarne = false;
+  bool _mostrarFruta = false;
   String imgPlato = imgPlato0;
   int alimentos = 0;
   String tuberculoElegido = '';
   String verduraElegida = '';
   String carneElegida = '';
+  String frutaElegida = '';
 
   bool get mostrarTuberculo => _mostrarTuberculo;
 
@@ -33,6 +35,13 @@ class LocalProvider extends ChangeNotifier {
   set mostrarCarne(bool value) {
     _mostrarCarne = value;
     cambiaDePlato();
+    notifyListeners();
+  }
+
+  bool get mostrarFruta => _mostrarFruta;
+
+  set mostrarFruta(bool value) {
+    _mostrarFruta = value;
     notifyListeners();
   }
 
