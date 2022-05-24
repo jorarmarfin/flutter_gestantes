@@ -26,3 +26,4 @@ export 'package:flutter_gestantes/screens/metodo_mano_ejemplo_screen.dart';
 export 'package:flutter_gestantes/screens/metodo_mano_porcion_calorias_screen.dart';
 export 'package:flutter_gestantes/screens/metodo_mano_distorsion_screen.dart';
 export 'package:flutter_gestantes/screens/calculadora_gestante_screen.dart';
+export 'package:flutter_gestantes/screens/diagnostico_gestante_screen.dart';

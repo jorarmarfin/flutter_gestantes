@@ -23,6 +23,7 @@ const imgCarne2 = 'assets/images/carne2.png';
 const imgCarne3 = 'assets/images/carne3.png';
 const imgFruta1 = 'assets/images/fruta1.png';
 const imgFruta2 = 'assets/images/fruta2.png';
+const imgGestanteResultado = 'assets/images/gestante-resultado.png';
 
 //Iconos
 const icoNutricionistas = 'assets/icons/nutricionistas.png';
@@ -74,6 +75,14 @@ BoxDecoration containerEstiloBoton(color, double radio) {
   return BoxDecoration(
     color: color,
     borderRadius: BorderRadius.circular(radio),
+  );
+}
+
+BoxDecoration containerEstiloBotonHeader(color, double radio) {
+  return BoxDecoration(
+    color: color,
+    borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(radio), topRight: Radius.circular(radio)),
   );
 }
 

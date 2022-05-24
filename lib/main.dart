@@ -93,6 +93,8 @@ class MyApp extends StatelessWidget {
               const MetodoManoDistorsionScreen(),
           CalculadoraGestanteScreen.routerName: (context) =>
               const CalculadoraGestanteScreen(),
+          DiagnosticoGestanteScreen.routerName: (context) =>
+              const DiagnosticoGestanteScreen(),
         });
   }
 }
